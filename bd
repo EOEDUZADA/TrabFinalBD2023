@@ -1,0 +1,21 @@
+create table usuarios (
+id_usuario serial PRIMARY KEY not null,
+nome_usuario varchar(50) not null,
+email_usuario varchar(256),
+password_usuario varchar(512),
+level_usuario varchar(6)
+);
+
+create table livros (
+id_livro serial PRIMARY KEY ,
+autores_livro varchar(256) ,
+titulo_livro varchar(256) ,
+imagem_livro varchar(255),
+ano_livro int not null,
+editora_livro varchar(256) ,
+nome_prestamista varchar(50) ,
+cpf_prestamista varchar(11) ,
+endereco_prestamista varchar(70) ,
+data timestamp,
+qtd_disponivel_emprestimo int
+);
