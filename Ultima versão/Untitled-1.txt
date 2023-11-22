@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+         body {
+            background-color: grey;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            
+            width: 600px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        h2 {
+            text-align: center;
+            color: black;
+        }
+
+        form {
+            text-align: center;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding-bottom: 11px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            
+        }
+
+        input[type="submit"] {
+            background-color: #ef4135;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #d6342b;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table, th, td {
+            border: 1px solid #ccc;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: purple;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Inserção de produtos</h2>
+
+    
+        <?php
+
+
+
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            $con_string = "host=localhost dbname=supermercado user=postgres password=postgres";
+            $dbcon = pg_connect($con_string);
+
+         
+          
+                
+                
+                }
+            if (!$dbcon) {
+                die("Erro ao conectar ao banco de dados: " . pg_last_error());
+            }
+
+
+
+            $nm_item = pg_escape_string($_POST["nm_item"]);
+
+            $qtd_item = pg_escape_string($_POST["qtd_item"]);
+
+            $preco_qtd = pg_escape_string($_POST["preco_qtd"]);
+
+            $query = "INSERT into produto (nm_item, qtd_item, preco_qtd) VALUES ('$nm_item','$qtd_item','$preco_qtd') " ;
+   
+        
+             if(!empty($_POST['dadopararemover'])){
+
+
+
+                $removerlinha= $_POST['dadopararemover'];
+                $query= "DELETE FROM produto WHERE cd_item=$removerlinha";
+                
+                pg_query($dbcon,$query);
+             }
+
+            if (pg_query($dbcon, $query) ) {
+                echo "<h2>Dados inseridos com sucesso!</h2>";
+            }
+            
+            
+            
+            else {
+                echo "Erro na consulta de inserção: " . pg_last_error();
+            }
+
+            pg_close($dbcon);
+        
+        ?>
+        
+        <h2>Dados dos Funcionários</h2>
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Qtd</th>
+                <th>Preco</th>
+                <th></th>
+            </tr>
+            
+            <?php
+
+            
+            $con_string = "host=localhost dbname=supermercado user=postgres password=postgres";
+            $dbcon = pg_connect($con_string);
+            $result = pg_query($dbcon, "SELECT cd_item,nm_item,qtd_item,preco_qtd FROM produto");
+            $max = pg_query($dbcon, "SELECT * FROM produto where preco_qtd = (select max(preco_qtd) FROM produto)");
+            $min = pg_query($dbcon, "SELECT * FROM produto where preco_qtd = (select min(preco_qtd) FROM produto)");
+            $sem_estoque = pg_query($dbcon, "SELECT * FROM produto where qtd_item = 0");
+
+            
+
+
+            
+            while ($row = pg_fetch_row($sem_estoque)) {
+                echo "<tr><td>$row[0]</td><td>$row[1]</td><td>$row[2]</td><td>$row[3]</td>";
+            
+?>
+                <td>
+                <form method="post" action="">
+                    <input type="hidden" id="inputHidden" name="dadopararemover" value=<?php echo $row[0]?> >
+                    <button type="submit">Excluir</button>
+                </form>
+            </td>
+            
+                
+                <?php
+            }
+
+            
+            
+        
+            
+             pg_close($dbcon);
+            
+                 
+        
+        ?>
+   
+    
