@@ -166,8 +166,6 @@ background-color: #0c0c0c;
                      </h6>
                  </div>
 
-                 <h3 class="mb-0 font-weight-semibold">R$152.92</h3>
-
                  <div>
                     <i class="fa fa-star star"></i>
                     <i class="fa fa-star star"></i>
