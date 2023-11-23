@@ -4,9 +4,10 @@
     box-sizing: border-box;
 }
 body {
-    font-family: poppins;
-
+    font-family: poppins;   
 }
+
+/* NAV */
 nav {
     height: 60px;
     background: #6E6BBA;
@@ -20,8 +21,8 @@ nav h1 {
   justify-content: center;
 font-weight: bolder;
 font-style: italic;
-width: 200px;
-color: #ffffff;
+width: 50px;
+color: #ff0101;
 text-transform:uppercase;
 
 }
@@ -48,22 +49,10 @@ li a:hover {
   color: rgb(194, 134, 255);
 }
 
-
-
-
-
-
-
-
-
-
-
-
 li a:hover {
 color: rgb(194, 134, 255);
 }
 
-
 label #sign-one,label #sign-two{
     font-size: 38px;
     color:#fff;
@@ -89,6 +78,10 @@ label #sign-one,label #sign-two{
 #res-menu {
     display: none;
 }
+
+
+/* ÁREA PRINCIPAL DO HOME, ONDE ESTÁ ESCRITO BOOKS AND MAGIC'S */
+
 .banner-area {
     display: flex;
     justify-content: center;
@@ -183,6 +176,8 @@ label #sign-one,label #sign-two{
 
 
 
+/* PARTE DO TITULO QUEM NÓS SOMOS */
+
 .quemsomos {
   
     grid-area:header;
@@ -274,7 +269,7 @@ label #sign-one,label #sign-two{
       
       
   
-  
+  /* PARTE DA DESCRIÇÃO QUEM NÓS SOMOS */
   .descricao{
     grid-area:aside;
    
@@ -301,6 +296,7 @@ label #sign-one,label #sign-two{
     
     }
 
+/* PARTE DO VÍDEO QUEM NÓS SOMOS */
 
   }
   .videosobre {
@@ -341,6 +337,9 @@ label #sign-one,label #sign-two{
     
   
     }
+
+
+    /* TABELA DOS FUNCIONÁRIOS */
   
   .funcionarios {
   background: rgb(255, 255, 255);
@@ -592,7 +591,6 @@ td img {
 
 
     .categoria {
-
         display: flex;
         justify-content: flex-start;
 font-size: 10vh;
@@ -661,11 +659,6 @@ font-family: 'Jost', sans-serif;
     
         }
 
-
-    
-      
-        
-        
         
         }
     
@@ -1404,11 +1397,6 @@ display: block;
  .fab {
   background: none;
  }
-
-
-
-
-
 
 .footer-home {
     
