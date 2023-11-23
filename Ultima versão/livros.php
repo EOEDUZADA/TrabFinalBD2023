@@ -122,7 +122,12 @@ background-color: #0c0c0c;
 
 
 
-
+<body>    
+<form method="POST" action="pesquisar.php">
+    Pesquisar:<input type="text" name="pesquisa" placeholder="PESQUISAR">
+    <input type="submit" value="ENVIAR">
+</form>
+</body>
 
 
 

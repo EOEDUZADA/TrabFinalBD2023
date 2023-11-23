@@ -5,67 +5,76 @@
 }
 body {
     font-family: poppins;
+
 }
-nav {display: flex;
-  padding-top: 20px;
-  align-items: center;
-  justify-content: space-evenly;
-    height: 80px;
-    background: #ff0000;
+nav {
+    height: 60px;
+    background: #6E6BBA;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 2px;
 }
 nav h1 {
+  display: flex;
+  justify-content: center;
+font-weight: bolder;
 font-style: italic;
 width: 200px;
-color: #fff;
+color: #ffffff;
 text-transform:uppercase;
 
 }
 nav ul {
-    float: right;
+    float: left;
     margin-right: 25px;
     list-style: none;
 }
+
 nav ul li {
+
     display: inline-block;
     line-height: 50px;
     margin: 0 15px;
 }
-nav ul li a {
+nav a {
     position: relative;
-    padding:5px 0;
-    color: #fff;
-    font-size: 18px;
+    padding:5px 25px;
+    color: #ffffff;
+    font-size: 15px;
     text-decoration: none;
 }
-.discount {
-  position: absolute;
-  width: 100vw;
-  margin: 0px;
-  padding: 0px;
-  display: flex;
-  justify-content: center;
-  background-color:#27bcda ;
-
-}
-.discount-text {
-align-items: flex-start;
+li a:hover {
+  color: rgb(194, 134, 255);
 }
 
-@media only screen and (min-width: 768px) and (max-width: 1223px){
 
 
-  nav {
-    flex-wrap: wrap;
-  background-color: #000;
- 
-  }
-  nav h1 {
-    color: rebeccapurple;
-    align-self: center;
-    vertical-align: center;
-  }
 
 
+
+
+
+
+
+
+
+li a:hover {
+color: rgb(194, 134, 255);
+}
+
+
+label #sign-one,label #sign-two{
+    font-size: 38px;
+    color:#fff;
+    float: right;
+    line-height: 50px;
+    margin-right: 30px;
+    cursor: pointer;
+    display: none;
+}
+#res-menu {
+    display: none;
 }
 
 label #sign-one,label #sign-two{
@@ -81,7 +90,9 @@ label #sign-one,label #sign-two{
     display: none;
 }
 .banner-area {
-    background: linear-gradient(to right,rgba(0,0,0,0.6),rgba(0,0,0,0.6)),url(../img/fallen.jpg);
+    display: flex;
+    justify-content: center;
+   background-color: #74747465;
     background-size: cover;
     background-position: center center;
     -webkit-background-size: cover;
@@ -89,7 +100,7 @@ label #sign-one,label #sign-two{
 }
 .banner-text {
     position: absolute;
-    width: 100%;
+    width: 20%;
     height: 100%;
     display: -webkit-flex;
     display: -moz-flex;
@@ -100,7 +111,7 @@ label #sign-one,label #sign-two{
     justify-content: center;
 }
 .banner-text h2 {
-    font-family: 'Anton', sans-serif;
+   font-family: 'Inter', sans-serif;
     color: #fff;
     margin-top: -140px;
     font-size: 96px;
@@ -740,13 +751,12 @@ font-family: 'Jost', sans-serif;
 
 .formulario {
     z-index: -1;
-  
     background: #FFFFFF;
     width: 600px;
     border-radius: 15px;
     box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
     box-sizing: border-box;
-    margin: 100px auto 10px;
+    margin: 100px auto 120px;
     overflow: hidden;
 }
 
@@ -807,7 +817,7 @@ font-family: 'Jost', sans-serif;
 
 .form-group button {
     outline: none;
-    background: #000000;
+    background: #d0e075;
     width: 100%;
     border: 0;
     border-radius: 4px;
@@ -1301,7 +1311,7 @@ font-family: 'Jost', sans-serif;
 
 footer{
  
-  background: #000;
+  background: #6E6BBA;
   height: auto;
   width: 100%;
   padding-top: 40px;
