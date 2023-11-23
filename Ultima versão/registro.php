@@ -17,16 +17,12 @@ if (isset($_GET["email_usuario"]) && isset($_GET["password_usuario"]) && isset($
      $nome_usuario = pg_escape_string($_GET["nome_usuario"]);
      $email_usuario = pg_escape_string($_GET["email_usuario"]);
      $hash = password_hash(($_GET["password_usuario"]), PASSWORD_DEFAULT);
-     
-
-     echo $nome_usuario;
-     
-
+ 
      if($email_usuario == 'admin@admin') {
 
-        $query_admin = "INSERT into usuarios (nome_usuario, email_usuario, password_usuario, level_usuario) VALUES ('$nome_usuario','$email_usuario','$hash','admin')";
+        $query_insert_admin = "INSERT into usuarios (nome_usuario, email_usuario, password_usuario, level_usuario) VALUES ('$nome_usuario','$email_usuario','$hash','admin')";
 
-        if (pg_query($dbcon, $query_admin)) {
+        if (pg_query($dbcon, $query_insert_admin)) {
             echo "<h2>Admin Registrado!</h2>";
         }
 
@@ -34,9 +30,9 @@ if (isset($_GET["email_usuario"]) && isset($_GET["password_usuario"]) && isset($
 
      else {
 
-     $query_insert = "INSERT into usuarios (nome_usuario, email_usuario, password_usuario,level_usuario) VALUES ('$nome_usuario','$email_usuario','$hash','user')";
+     $query_insert_usuario = "INSERT into usuarios (nome_usuario, email_usuario, password_usuario,level_usuario) VALUES ('$nome_usuario','$email_usuario','$hash','user')";
      
-     if (pg_query($dbcon, $query_insert)) {
+     if (pg_query($dbcon, $query_insert_usuario)) {
         header("Location: home.html");
      } else {
          echo "Erro na consulta de inserção: " . pg_last_error();
