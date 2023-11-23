@@ -135,7 +135,6 @@ background-color: #0c0c0c;
 <?php
 
 
- // Cartão inserido com sucesso, agora vamos buscar todos os cartões no banco de dados
  $con_string = "host=localhost dbname=biblioteca user=postgres password=postgres";
  $dbcon = pg_connect($con_string);
 
