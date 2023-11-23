@@ -30,14 +30,14 @@ session_start();
 
              if($email_usuario == "admin@admin" && $verificar_senha == true) {
 
-header("Location: mouses.html");
+header("Location: adminpage.php");
 
              } 
 
          else if($verificar_senha == true) {
                  echo 'olá, usuário autenticado ';
                  $_SESSION['nome'] =  $valor_nome_usuario;
-                 header("Location: teste.php");
+                 header("Location: home.html");
              }
 
              
