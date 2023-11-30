@@ -1,60 +1,59 @@
 <?php
-
 session_start();
 
+if ($_SERVER["REQUEST_METHOD"] == "GET") {
+    $con_string = "host=localhost dbname=biblioteca user=postgres password=postgres";
+    $dbcon = pg_connect($con_string);
+
+    if (!$dbcon) {
+        die("Erro ao conectar ao banco de dados: " . pg_last_error());
+    }
+
+    if (isset($_GET["email_usuario"]) && isset($_GET["password_usuario"])) {
+        $email_usuario = pg_escape_string($_GET["email_usuario"]);
+        $senha_usuario = pg_escape_string($_GET["password_usuario"]);
+
+        $select_senha = pg_query($dbcon, "SELECT password_usuario, nome_usuario, id_usuario FROM usuarios WHERE email_usuario = '$email_usuario'");
+        $result = pg_fetch_assoc($select_senha);
+
+        if ($result) {
+            $hash_senha = $result["password_usuario"];
+            $verificar_senha = password_verify($senha_usuario, $hash_senha);
+
+            if ($verificar_senha) {
+                // Autenticação bem-sucedida
+                $_SESSION['email'] = $email_usuario;
+                $_SESSION['nome'] = $result["nome_usuario"];
+                $_SESSION['id_usuario'] = $result["id_usuario"];
+
+                if ($email_usuario == 'eduardo@admin') {
+                    header("Location: adminpage.php?id=" . $_SESSION['id_usuario']);
+                } else {
+                    header("Location: usuario.php?id=" . $_SESSION['id_usuario']);
+                }
+                exit;
+            } else {
+                $erro = "Senha incorreta. Tente novamente.";
+            }
+        } else {
+            $erro = "Usuário não encontrado. Verifique o email e tente novamente.";
+        }
+    }
+
+    pg_close($dbcon);
+}
 ?>
+
+
+
+
+
 <?php
-     if ($_SERVER["REQUEST_METHOD"] == "GET") {
-         $con_string = "host=localhost dbname=biblioteca user=postgres password=postgres";
-         $dbcon = pg_connect($con_string);
+if (isset($erro)) {
+    echo '<div class="erro">' . $erro . '</div>';
+}
+?>
 
-         if (!$dbcon) {
-             die("Erro ao conectar ao banco de dados: " . pg_last_error());
-         }
-
-
-             
-     if (isset($_GET["email_usuario"])) {
-
-  
-             $email_usuario = pg_escape_string($_GET["email_usuario"]);
-
-
-             $select_senha = pg_query($dbcon,"SELECT password_usuario from usuarios  where email_usuario = '$email_usuario'");
-             $select_nome_usuario = pg_query($dbcon,"SELECT nome_usuario from usuarios  where email_usuario = '$email_usuario'"); 
-            $valor_senha = pg_fetch_result($select_senha ,0,0);
-            $valor_nome_usuario = pg_fetch_result($select_nome_usuario ,0,0);
-             $verificar_senha = password_verify(($_GET["password_usuario"]), $valor_senha);
-
-
-
-             if($email_usuario == "admin@admin" && $verificar_senha == true) {
-
-header("Location: adminpage.php");
-
-             } 
-
-         else if($verificar_senha == true) {
-                 echo 'olá, usuário autenticado ';
-                 $_SESSION['nome'] =  $valor_nome_usuario;
-                 header("Location: home.html");
-             }
-
-             
-
-            
-             
-      
-               
-           
-         }
-         
-
-         pg_close($dbcon);
-     }
-
-   
-     ?>
 
 
 <!DOCTYPE html>
@@ -98,13 +97,9 @@ header("Location: adminpage.php");
     </label>
     <ul>
 
-<li><a href="home.html">Home</a></li>
-<li><a href="monitores.html">Monitores</a></li>
-<li><a href="teclados.html">Teclados</a></li>
-<li><a href="mousepads.html">Biblioteca Claken's</a></li>
-<li><a href="mouses.html">Mouse</a></li>
-<li><a href="login.html">Login</a></li>
-<li><a href="claken.html">Claken</a></li>
+
+<li><a href="#">Books and Magic's</a></li>
+
 
     </ul>
 
@@ -167,7 +162,7 @@ header("Location: adminpage.php");
         
 
 <p>by Pros</p><br>
-        <p>&copy; claken imports 2022</p>
+        <p>&copy; Books and Magic's 2022</p>
         </div>
         
         

@@ -20,7 +20,62 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
     /> 
+<style>
+    body {
+    font-family: 'Public Sans', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: #f5f5f5;
+}
+
+.container {
+    max-width: 400px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    color: #333;
+    text-align: center;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+p {
+    margin-bottom: 15px;
+}
+
+input[type="text"],
+input[type="file"],
+input[type="submit"] {
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+input[type="submit"] {
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+}
+
+</style>
+
+
 </head>
+
+
+
 <body>
 
 <nav>
@@ -30,12 +85,13 @@
           <i class="fa fa-bars" id="sign-one"></i>
           <i class="fa fa-times" id="sign-two"></i>
           </label>
-          <h1>Claken</h1>
+          <h1>Books and Magics</h1>
           <ul>
       
-      <li><a href="home.html">Home</a></li>
-      <li><a href="mouses.html">Mouse</a></li>
+      <li><a href="home.php">Home</a></li>
       <li><a href="livros.php">Livros</a></li>
+      <li><a href="usuario.php">Você</a></li>
+      <li><a href="adminusuarios.php">Usuários</a></li>
       
       
           </ul>
@@ -48,6 +104,7 @@
            <p>Autor livros <input type="text" name="autores_livro" /></p>
             <p>Titulo Livro <input type="text" name="titulo_livro" /></p>
             <p>Ano  <input type="text" name="ano" /></p>
+            <p>Quantidade disponível  <input type="text" name="qtd_disponivel" /></p>
             <p>Editora  <input type="text" name="editora" /></p>
       <input type="file" name="fileUpload">
 
@@ -76,6 +133,7 @@ $autor = pg_escape_string($_POST["autores_livro"]);
 $titulo = pg_escape_string($_POST["titulo_livro"]);
 $ano = pg_escape_string($_POST["ano"]);
 $editora = pg_escape_string($_POST["editora"]);
+$qtd_disponivel = pg_escape_string($_POST["qtd_disponivel"]);
 
 
 $ext = $_FILES['fileUpload']['type']; //Pegando extensão do arquivo
@@ -85,7 +143,7 @@ $dir = 'uploads/'; //Diretório para uploads
 move_uploaded_file($_FILES['fileUpload']['tmp_name'], $dir.$nome); //Fazer upload do arquivo
 
 
-$sql_code = "INSERT into livros (autores_livro, titulo_livro,ano_livro,editora_livro,imagem_livro) VALUES ('$autor','$titulo','$ano','$editora','$nome')";
+$sql_code = "INSERT into livros (autores_livro, titulo_livro,ano_livro,editora_livro,imagem_livro,qtd_disponivel_emprestimo) VALUES ('$autor','$titulo','$ano','$editora','$nome','$qtd_disponivel')";
 
 
 // ...
