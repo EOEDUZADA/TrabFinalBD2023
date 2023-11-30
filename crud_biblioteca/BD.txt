@@ -1,0 +1,38 @@
+create table usuarios (
+id_usuario serial PRIMARY KEY not null,
+nome_usuario varchar(50) not null,
+email_usuario varchar(256),
+password_usuario varchar(512),
+level_usuario varchar(6)
+);
+
+create table livros (
+id_livro serial PRIMARY KEY ,
+autores_livro varchar(256) ,
+titulo_livro varchar(256) ,
+imagem_livro varchar(255),
+ano_livro int not null,
+editora_livro varchar(256) ,
+nome_prestamista varchar(50) ,
+id_prestamista,
+livros_emprestados,
+data timestamp,
+qtd_disponivel_emprestimo int,
+foreign key (id_usuario) references assinante(id_usuario)
+);
+
+
+
+CREATE TABLE emprestimos (
+    id_emprestimo SERIAL PRIMARY KEY,
+    email_usuario VARCHAR(256),
+    id_livro INT REFERENCES livros(id_livro),
+    data_emprestimo TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+foreign key (email_usuario) references usuarios(email_usuario);
+);
+
+
+
+CREATE EXTENSION IF NOT EXISTS unaccent;
+
+
