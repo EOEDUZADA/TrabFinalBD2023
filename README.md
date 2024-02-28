@@ -1,1 +1,1 @@
-# TrabFinalBD2023
+# Trabalho final da disciplina de Banco de Dados
